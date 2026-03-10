@@ -9,6 +9,12 @@ vector<string> validateTicket(const Ticket& ticket) {
 
     regex codePattern("^TK\\d{3}$");
 
+    int number = stoi(ticket.code.substr(2)); 
+
+    if (ticket.type == "vip" && number <= 500) {
+        errors.push_back("VIP tickets must have code greater than TK500");
+    }
+
     if (ticket.code.empty()) {
         errors.push_back("Empty ticket code");
     }
