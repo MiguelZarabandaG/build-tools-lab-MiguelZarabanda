@@ -7,7 +7,7 @@ class TestValidator(unittest.TestCase):
         attendee = {
             "name": "Sara Palacios",
             "email": "sara@example.com",
-            "user_id": "EV-1023",
+            "registration_code": "EV-1023",
             "age": 25,
             "ticket_type": "vip"
         }
@@ -17,7 +17,7 @@ class TestValidator(unittest.TestCase):
         attendee = {
             "name": "Juan",
             "email": "juanexample.com",
-            "user_id": "EV-0001",
+            "registration_code": "EV-0001",
             "age": 20,
             "ticket_type": "general"
         }
@@ -27,31 +27,37 @@ class TestValidator(unittest.TestCase):
         attendee = {
             "name": "Ana",
             "email": "ana@example.com",
-            "user_id": "EV-9876",
+            "registration_code": "EV-9876",
             "age": 16,
             "ticket_type": "student"
         }
         self.assertIn("Attendee must be 18 or older", validate_attendee(attendee))
 
-    def test_invalid_user_id_formats(self):
-        attendee = {
-            "name": "Marco",
-            "email": "marco@example.com",
-            "user_id": "EV-12A3",
-            "age": 30,
-            "ticket_type": "general"
-        }
-        self.assertIn("Invalid user ID", validate_attendee(attendee))
+    def test_invalid_registration_code_formats(self):
+        invalid_codes = ["EV1023", "EV-12", "EV-ABCDE", "AB-1234"]
 
-    def test_valid_user_id_formats(self):
-        attendee = {
-            "name": "Lucia",
-            "email": "lucia@example.com",
-            "user_id": "EV-1023",
-            "age": 28,
-            "ticket_type": "vip"
-        }
-        self.assertNotIn("Invalid user ID", validate_attendee(attendee))
+        for code in invalid_codes:
+            attendee = {
+                "name": "Marco",
+                "email": "marco@example.com",
+                "registration_code": code,
+                "age": 30,
+                "ticket_type": "general"
+            }
+            self.assertIn("Invalid registration code", validate_attendee(attendee))
+
+    def test_valid_registration_code_formats(self):
+        valid_codes = ["EV-1023", "EV-0001", "EV-9876"]
+
+        for code in valid_codes:
+            attendee = {
+                "name": "Lucia",
+                "email": "lucia@example.com",
+                "registration_code": code,
+                "age": 28,
+                "ticket_type": "vip"
+            }
+            self.assertNotIn("Invalid registration code", validate_attendee(attendee))
 
 if __name__ == "__main__":
     unittest.main()

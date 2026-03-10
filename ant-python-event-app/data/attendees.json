@@ -2,28 +2,28 @@
   {
     "name": "Laura",
     "email": "laura@example.com",
-    "user_id": "EV-1023",
+    "registration_code": "EV-1023",
     "age": 22,
     "ticket_type": "vip"
   },
   {
     "name": "Pedro",
     "email": "pedroexample.com",
-    "user_id": "EV-0001",
+    "registration_code": "EV-0001",
     "age": 19,
     "ticket_type": "general"
   },
   {
     "name": "Sofia",
     "email": "sofia@example.com",
-    "user_id": "EV-9876",
+    "registration_code": "EV-9876",
     "age": 17,
     "ticket_type": "student"
   },
   {
     "name": "Jose",
     "email": "sofia@example.com",
-    "user_id": "EV-98A6",
+    "registration_code": "EV-98A6",
     "age": 19,
     "ticket_type": "student"
   }
