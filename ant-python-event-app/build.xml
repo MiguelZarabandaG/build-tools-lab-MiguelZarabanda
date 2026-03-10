@@ -27,7 +27,16 @@
         </exec>
     </target>
 
-    <target name="package" depends="clean,test">
+    <target name="report">
+        <mkdir dir="${dist.dir}"/>
+        <echo>Generating validation report...</echo>
+        <exec executable="python3" failonerror="true" output="${dist.dir}/report.txt">
+            <arg value="${src.dir}/app.py"/>
+        </exec>
+        <echo>Report created at ${dist.dir}/report.txt</echo>
+    </target>
+
+    <target name="package" depends="clean,test,report">
         <echo>Packaging project...</echo>
         <exec executable="zip" failonerror="true">
             <arg value="-r"/>
@@ -36,6 +45,9 @@
             <arg value="tests"/>
             <arg value="data"/>
             <arg value="build.xml"/>
+            <arg value="${dist.dir}/report.txt"/>
         </exec>
     </target>
+
+    
 </project>
